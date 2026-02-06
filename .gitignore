@@ -7,9 +7,12 @@ PhyExp/
 PhyPart/
 Phystat/
 Quantique/
-Relat/
 Séminaire/
+media/
 
+# Fichiers tex et autres inutiles
+*.synctex.gz
+*.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

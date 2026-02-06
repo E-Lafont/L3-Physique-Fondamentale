@@ -1,0 +1,997 @@
+% chktex-file 1
+% chktex-file 3
+% chktex-file 25
+% chktex-file 26
+\documentclass[a4paper]{report}
+\setlength{\headheight}{12.2pt}
+
+\input{../macro}
+
+%--------------------------
+% Infos personnalisables
+%--------------------------
+\newcommand{\titre}{Relativité restreinte}
+\newcommand{\auteur}{Emmanuel Lafont}
+
+
+% ---------------------------
+% PAGE & STYLES
+% ---------------------------
+\geometry{margin=2.5cm}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{} % Efface en-tête et pied de page
+
+% --- En-tête ---
+\lhead{\rightmark}
+\rhead{\thepage}
+
+% --- Pied de page : section en bas à gauche, page à droite (par exemple) ---
+\lfoot{\titre}
+\rfoot{\thepage}
+
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+\thispagestyle{empty}
+
+%--------------------------
+% Partie haute de la page
+%--------------------------
+\begin{center}
+    \vspace{0.5cm}
+\end{center}
+\vspace{6cm} % Espace central ajustable
+%--------------------------
+% Titre central
+%--------------------------
+\begin{center}
+    {\Large \textbf{\titre}}\\[1cm]
+    {\large \auteur}\\[0.5cm]
+    {30 janvier 2026}
+\end{center}
+
+\vfill % pousse les infos suivantes en bas
+
+%--------------------------
+% Pied de page
+%--------------------------
+\clearpage
+
+\tableofcontents
+\clearpage
+
+\section{Introduction}
+
+Une transformation de \textsc{Galilée} est la loi de transformation pour deux référentiels en translation rectiligne uniforme l'un par rapport à l'autre.
+
+Au XIX$^{e}$ siècle, l'électromagnétisme des équations de \textsc{Maxwell} et la mécanique classique de \textsc{Newton} semblent avoir couvert l'ensemble des phénomènes physiques. Cependant, contrairement aux équations de la mécanique classique, les équations de l'électromagnétisme ne sont pas invariantes par transformation de \textsc{Galilée}. \\
+En effet, là où en mécanique classique, la vitesse d'un objet dépend du référentiel par lequel on l'observe, en électromagnétisme la vitesse de la lumière est fixée, peut importe le référentiel.\\
+Il y a une tentative de trouver un référentiel privilégié pour l'électromagnétisme : l'Éther. Mais l'experience de \textsc{Michelson-Morley} en 1887 montre que la vitesse de la lumière est la même dans tous les référentiels inertiels.
+
+C'est \textsc{Einstein} qui, en 1905, propose une nouvelle théorie de la relativité pour résoudre ce paradoxe.
+
+\section{Postulats de la relativité restreinte}
+La relativité restreinte repose sur deux postulats.
+\Post{premier}{Toutes les lois de la physique sont invariantes par changement de référentiel inertiel.}
+\Post{second}{La vitesse de la lumière dans le vide est la même dans tous les référentiels inertiels.}
+
+On fait aussi l'hypothèse que l'espace est homogène et isotrope, et que le temps est homogène.
+
+\section{Conséquences des postulats}
+\subsection{Perte de la simultanéité}
+La première conséquence des postulats est que le temps est relatif. Deux événements simultanés dans un référentiel ne le sont pas forcément dans un autre référentiel en mouvement par rapport au premier.
+
+On considère un wagon (référentiel $\cR'$) de longueur $L$ en mouvement à la vitesse $v$ par rapport au sol (référentiel $\cR$).
+Au milieu du wagon, une source lumineuse émet deux photons en direction des deux extrémités du wagon.
+
+\begin{tikzpicture}[>=Stealth, scale=1]
+
+      % Axes 3D (perspective)
+    \draw[->, blue] (0,0) -- (9,0) node[right] {$x'$};
+    \draw[->, blue] (0,0) -- (0,2.5) node[above] {$y'$};
+    \draw[->, blue] (0,0) -- (-1.2,-1.0) node[left] {$z'$};
+
+    % Nom du repère
+    \node[above left, blue] at (0,0) {$\cR'$};
+
+    % Faces du wagon
+    \fill[gray] (6,1) -- (6.4,1.3) -- (6.4,0.3) -- (6,0) -- cycle;  % face devant
+    \fill[gray] (6,1) -- (6.4,1.3) -- (0.4,1.3) -- (0,1) -- cycle;  % face dessus
+    \fill[white] (0,0) rectangle (6,1);
+    \draw[thick] (6,0) -- (6.4,0.3);
+    \draw[thick] (0,1) -- (0.4,1.3);
+    \draw[thick] (6,1) -- (6.4,1.3);
+    \draw[thick] (0.4, 1.3) -- (6.4,1.3) -- (6.4,0.3);
+    \draw[thick] (0,0) rectangle (6,1);          % face avant
+
+    % Longueur L
+    \draw[<->] (0,1.6) -- (6,1.6);
+    \node[above] at (3,1.6) {$L$};
+
+    \begin{feynman}
+        \vertex (M) at (3.2, 0.65);
+        \vertex (a) at (4.2, 0.65);
+        \vertex (b) at (2.2, 0.65);
+        \diagram*{
+        (M) -- [photon, thick, color=yellow!90!orange] (a),
+        (M) -- [photon, thick, color=yellow!90!orange] (b),
+        };
+    \end{feynman}
+
+    % Source
+    \draw (3.2,0.15) -- (3.2,0.65);
+    \fill[yellow] (3.2,0.65) circle (2pt);
+    \draw (3.2,0.65) circle (2pt);
+
+    % Photons
+    \node[below, yellow!80!black] at (2.7, 0.65) {$\gamma_1$};
+    \node[below, yellow!80!black] at (3.7, 0.65) {$\gamma_2$};
+
+\end{tikzpicture}
+
+Dans le référentiel $\cR'$, les photons ont une distance $d'=\frac12L$ à parcourir à la vitesse $c$. Ils la parcourent donc tout deux en un temps $t'=\frac L{2c}$. Les événements sont donc simultanés.
+
+\begin{tikzpicture}[>=Stealth, scale=1]
+
+    \begin{scope}[shift={(-0.3,-0.3)}]
+        % Axes 3D (perspective)
+        \draw[->] (0,0) -- (9,0) node[right] {$x$};
+        \draw[->] (0,0) -- (0,2.5) node[above] {$y$};
+        \draw[->] (0,0) -- (-1.2,-1.0) node[left] {$z$};
+
+        % Nom du repère
+        \node[above left] at (0,0) {$\cR$};
+    \end{scope}
+
+    % Faces du wagon
+    \fill[gray!75!white] (6,1) -- (6.4,1.3) -- (6.4,0.3) -- (6,0) -- cycle;  % face devant
+    \fill[gray!75!white] (6,1) -- (6.4,1.3) -- (0.4,1.3) -- (0,1) -- cycle;  % face dessus
+    \fill[white] (0,0) rectangle (6,1);
+    \draw[thick, dashed] (6,0) -- (6.4,0.3);
+    \draw[thick, dashed] (0,1) -- (0.4,1.3);
+    \draw[thick, dashed] (6,1) -- (6.4,1.3);
+    \draw[thick, dashed] (0.4, 1.3) -- (6.4,1.3) -- (6.4,0.3);
+    \draw[thick, dashed] (0,0) rectangle (6,1);
+
+    \begin{scope}[shift={(1,0)}]
+        % Faces du wagon
+        \fill[gray] (6,1) -- (6.4,1.3) -- (6.4,0.3) -- (6,0) -- cycle;  % face devant
+        \fill[gray] (6,1) -- (6.4,1.3) -- (0.4,1.3) -- (0,1) -- cycle;  % face dessus
+        \fill[white] (0,0) rectangle (6,1);
+        \draw[thick] (6,0) -- (6.4,0.3);
+        \draw[thick] (0,1) -- (0.4,1.3);
+        \draw[thick] (6,1) -- (6.4,1.3);
+        \draw[thick] (0.4, 1.3) -- (6.4,1.3) -- (6.4,0.3);
+        \draw[thick] (0,0) rectangle (6,1);          % face avant
+
+        % Longueur L
+        \draw[<->] (0,1.6) -- (6,1.6);
+        \node[above] at (3,1.6) {$L$};
+
+        % Vecteur vitesse v (en vert)
+        \draw[->, very thick, green!70!gray] (6.2,0.65) -- (8.2,0.65);
+        \node[above, green!60!black] at (7.2,0.65) {$\vec v$};
+
+        \begin{feynman}
+            \vertex (M) at (3.2, 0.65);
+            \vertex (a) at (3.7, 0.65);
+            \vertex (b) at (1.7, 0.65);
+            \diagram*{
+            (M) -- [photon, thick, color=yellow!90!orange] (a),
+            (M) -- [photon, thick, color=yellow!90!orange] (b),
+            };
+        \end{feynman}
+
+        % Source
+        \draw (3.2,0.15) -- (3.2,0.65);
+        \fill[yellow] (3.2,0.65) circle (2pt);
+        \draw (3.2,0.65) circle (2pt);
+
+        % Photons
+        \node[below, yellow!80!black] at (2.7, 0.65) {$\gamma_1$};
+        \node[below, yellow!80!black] at (3.7, 0.65) {$\gamma_2$};
+    \end{scope}
+
+\end{tikzpicture}
+
+Dans le référentiel $\cR$, le système est en mouvement. Le photon 1 doit parcourir 
+\[
+    d_1 = \frac12L-v\Delta t=\frac12L-v\frac{d_1}c=\frac{Lc}{2(c+v)}
+\]
+là ou le deuxième doit parcourir quant à lui 
+\[
+    d_2 = \frac12L+v\Delta t=\frac12L+v\frac{d_2}c=\frac{Lc}{2(c-v)}
+\]
+
+Le premier photon parcoure le wagon en un temps $t_1=\frac{L}{2(c+v)}$ là où le deuxième le fait en un temps $t_2=\frac{Lc}{2(c-v)}>t_1$.\\
+Ils n'arrivent donc pas en même temps, on perd la simultanéité des événements!
+
+\subsection{Dilatation du temps}
+La seconde conséquence directe des postulats de la relativité restreinte est la dilatation du temps. En fonction du référentiel, le temps s'écoule à des vitesses différentes.
+
+On reconsidère notre wagon et les référentiels de la partie précédente. On place désormais deux miroirs qui se font face, avec un photon qui se déplace entre les deux.
+
+\begin{tikzpicture}[>=Stealth, scale=1]
+
+    % Axes 3D (perspective)
+    \draw[->, blue] (0,0) -- (9,0) node[right] {$x'$};
+    \draw[->, blue] (0,0) -- (0,3.5) node[above] {$y'$};
+    \draw[->, blue] (0,0) -- (-1.2,-1.0) node[left] {$z'$};
+
+    % Nom du repère
+    \node[below right, blue] at (0,0) {$\cR'$};
+
+    % Faces du wagon
+    \fill[gray] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+    \fill[gray] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+    \fill[white] (0,0) rectangle (3,3);
+    \draw[thick] (3,0) -- (3.4,0.3);
+    \draw[thick] (0,3) -- (0.4,3.3);
+    \draw[thick] (3,3) -- (3.4,3.3);
+    \draw[thick] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+    \draw[thick] (0,0) rectangle (3,3);          % face avant
+
+    % Longueur L
+    \draw[<->] (-0.5,0) -- (-0.5,3);
+    \node[left] at (-0.5,1.5) {$h$};
+
+    % Ligne du miroir
+    \draw[thick] (0.5,0.5) -- (2.5,0.5);
+    \draw[thick] (0.5,2.5) -- (2.5,2.5);
+
+    % Hachures du miroir
+    \foreach \x in {0.5,0.7,...,2.5} {
+        \draw (\x, 0.5) -- (\x+0.2, 0.3);
+    }
+    \foreach \x in {0.5,0.7,...,2.5} {
+        \draw (\x, 2.5) -- (\x-0.2, 2.7);
+    }
+
+    \node[left] at (0.5,0.5) {$A$};
+    \node[right] at (2.5,2.5) {$B$};
+
+    \begin{feynman}
+        \vertex (a) at (1.5, 0.5);
+        \vertex (b) at (1.5, 2.5);
+        \diagram*{
+        (b) -- [photon, thick, color=yellow!90!orange] (a),
+        (a) -- [photon, thick, color=yellow!90!orange] (b),
+        };
+    \end{feynman}
+    
+    \node[left, yellow!80!black] at (1.5, 1.5) {$\gamma$};
+
+\end{tikzpicture}
+
+Dans le référentiel $\cR'$, le photon fait un aller-retour en un temps $\Delta t'=2\frac hc$.
+
+\begin{tikzpicture}[>=Stealth, scale=1]
+
+    \begin{scope}[shift={(-0.3,-0.3)}]
+        % Axes 3D (perspective)
+        \draw[->] (0,0) -- (10.5,0) node[right] {$x$};
+        \draw[->] (0,0) -- (0,3.5) node[above] {$y$};
+        \draw[->] (0,0) -- (-1.2,-1.0) node[left] {$z$};
+
+        % Nom du repère
+        \node[below right] at (0,0) {$\cR$};
+    \end{scope}
+
+    % Longueur h
+    \draw[<->] (-0.5,0) -- (-0.5,3);
+    \node[left] at (-0.5,1.5) {$h$};
+
+    % Faces du wagon
+    \fill[gray!50!white] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+    \fill[gray!50!white] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+    \fill[white] (0,0) rectangle (3,3);
+    \draw[thick, dashed] (3,0) -- (3.4,0.3);
+    \draw[thick, dashed] (0,3) -- (0.4,3.3);
+    \draw[thick, dashed] (3,3) -- (3.4,3.3);
+    \draw[thick, dashed] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+    \draw[thick, dashed] (0,0) rectangle (3,3);          % face avant
+
+    % Ligne du miroir
+    \draw[thick] (0.5,0.5) -- (2.5,0.5);
+    \draw[thick] (0.5,2.5) -- (2.5,2.5);
+
+    % Hachures du miroir
+    \foreach \x in {0.5,0.7,...,2.5} {
+        \draw (\x, 0.5) -- (\x+0.2, 0.3);
+    }
+    \foreach \x in {0.5,0.7,...,2.5} {
+        \draw (\x, 2.5) -- (\x-0.2, 2.7);
+    }
+
+    \node[left] at (0.5,0.5) {$A$};
+    \node[right] at (2.5,2.5) {$B$};
+
+    \draw[thick, dotted] (3,0) -- (3.5,0);
+    \draw[thick, dotted] (3,3) -- (3.5,3);
+    \draw[thick, dotted] (3.4,0.3) -- (3.9,0.3);
+    \draw[thick, dotted] (3.4,3.3) -- (3.9,3.3);
+
+    \begin{scope}[shift={(3.5,0)}]
+        % Faces du wagon
+        \fill[gray!75!white] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+        \fill[gray!75!white] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+        \fill[white] (0,0) rectangle (3,3);
+        \draw[thick, dashed] (3,0) -- (3.4,0.3);
+        \draw[thick, dashed] (0,3) -- (0.4,3.3);
+        \draw[thick, dashed] (3,3) -- (3.4,3.3);
+        \draw[thick, dashed] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+        \draw[thick, dashed] (0,0) rectangle (3,3);          % face avant
+
+        % Ligne du miroir
+        \draw[thick] (0.5,0.5) -- (2.5,0.5);
+        \draw[thick] (0.5,2.5) -- (2.5,2.5);
+
+        % Hachures du miroir
+        \foreach \x in {0.5,0.7,...,2.5} {
+            \draw (\x, 0.5) -- (\x+0.2, 0.3);
+        }
+        \foreach \x in {0.5,0.7,...,2.5} {
+            \draw (\x, 2.5) -- (\x-0.2, 2.7);
+        }
+
+        \node[left] at (0.5,0.5) {$A$};
+        \node[right] at (2.5,2.5) {$B$};
+
+        \draw[thick, dotted] (3,0) -- (3.5,0);
+        \draw[thick, dotted] (3,3) -- (3.5,3);
+        \draw[thick, dotted] (3.4,0.3) -- (3.9,0.3);
+        \draw[thick, dotted] (3.4,3.3) -- (3.9,3.3);
+    \end{scope}
+
+    \begin{scope}[shift={(7,0)}]
+        % Faces du wagon
+        \fill[gray] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+        \fill[gray] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+        \fill[white] (0,0) rectangle (3,3);
+        \draw[thick] (3,0) -- (3.4,0.3);
+        \draw[thick] (0,3) -- (0.4,3.3);
+        \draw[thick] (3,3) -- (3.4,3.3);
+        \draw[thick] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+        \draw[thick] (0,0) rectangle (3,3);          % face avant
+
+        % Ligne du miroir
+        \draw[thick] (0.5,0.5) -- (2.5,0.5);
+        \draw[thick] (0.5,2.5) -- (2.5,2.5);
+
+        % Hachures du miroir
+        \foreach \x in {0.5,0.7,...,2.5} {
+            \draw (\x, 0.5) -- (\x+0.2, 0.3);
+        }
+        \foreach \x in {0.5,0.7,...,2.5} {
+            \draw (\x, 2.5) -- (\x-0.2, 2.7);
+        }
+
+        \node[left] at (0.5,0.5) {$A$};
+        \node[right] at (2.5,2.5) {$B$};
+        
+        % Vecteur vitesse v (en vert)
+        \draw[->, very thick, green!70!gray] (3.2,1.65) -- (5.2,1.65);
+        \node[above, green!60!black] at (4.2,1.65) {$\vec v$};
+    \end{scope}
+
+    \begin{feynman}
+        \vertex (a) at (1.5, 0.5);
+        \vertex (b) at (5, 2.5);
+        \vertex (c) at (8.5, 0.5);
+        \diagram*{
+        (a) -- [photon, thick, color=yellow!90!orange] (b),
+        (b) -- [photon, thick, color=yellow!90!orange] (c),
+        };
+    \end{feynman}
+    
+    \node[left, yellow!80!black] at (4.5, 1.5) {$\gamma$};
+
+\end{tikzpicture}
+
+D'après le premier postulat, le photon est obligé de revenir au centre du miroir $A$ après un rebond, car c'est son comportement en $\cR'$.\\
+En notant $d$ la distance parcourue par le photon du point de vue de $\cR$ entre une periode $\Delta t$, on a :
+\[
+    d = 2\sqrt{v^2\frac{\Delta t^2}4+h^2}=c\Delta t
+\]
+Donc :
+\[
+    \Delta t = \sqrt{\frac{4h^2}{c^2-v^2}}=\frac{\Delta t'}{\sqrt{1-\frac{v^2}{c^2}}}
+\]
+On appelle le facteur $\gamma = \frac1{\sqrt{1-\frac{v^2}{c^2}}}$ le \textit{facteur de \textsc{Lorentz}}. On a $\gamma\ge1$ et comme $\Delta t = \gamma\Delta t'$, la période observée dans $\cR$ est plus longue que celle de $\cR'$. \\
+On appelle $\Delta t'$ le \textit{temps propre} de $\cR'$. Les temps propres sont toujours les plus cours.
+
+\section{Cadre général}
+
+\defi[Référentiel]{
+    Un \textit{référentiel} est un solide (un ensemble de points fixes entre eux) par rapport auquel on repère une position ou un mouvement.
+}
+
+Un référentiel est donc une collection de montres et de règles à travers l'espace et le temps pour pouvoir mesurer chaque point.
+
+\defi[Événement]{
+    Un \textit{événement} est un point de l'espace-temps, qui peut donc être labellisé par des coordonées $(x,y,z,t)$.
+}
+
+\defi[Intervalle]{
+    On appelle \textit{intervalle entre deux événements} $E_1,E_2$ le vecteur distance $\Delta_{12}=E_1-E_2$. \\
+    L'\textit{intervalle invariant} est la norme (au carré) de ce vecteur :
+    \[
+        \Delta s^2 = \norm{\Delta_{12}}^2=c^2\Delta t^2-\Delta x^2-\Delta y^2-\Delta z^2
+    \]
+    \rem Comme on s'interesse pricipalement à la norme de l'intervalle, $\Delta_{12}=E_1-E_2$ et $\Delta_{21}=E_2-E_1$ correspondent au même intervalle.
+}
+
+\prop{
+    L'intervalle invariant $\Delta s^2$ est invariant par changement de référentiel, et donc indépendant ce ceux ci.
+}
+
+\Demo{
+    Pour simplifier les calculs, on se place dans un espace à deux dimentions.\\
+    On considère d'abord le cas d'un photon, qui part d'un événement $(t_1, x_1, y_1)$ vers un événement $(t_2,x_2,y_2)$.
+
+    \begin{center}
+    \begin{tikzpicture}[>=Stealth]
+        % Axes
+        \draw[->] (0,0) -- (2,0) node[right] {$x$};
+        \draw[->] (0,0) -- (0,2) node[above] {$y$};
+
+        % Nom du repère
+        \node[below right] at (0,0) {$\cR$};
+
+        \begin{feynman}
+            \vertex (1) at (1.5,0.5);
+            \vertex (2) at (0.5,1.5);
+            \diagram*{
+            (1) -- [photon, thick, color=yellow!90!orange] (2),
+            };
+        \end{feynman}
+
+        \fill (0.5,1.5) circle (2pt);
+        \fill (1.5,0.5) circle (2pt);
+
+        \draw[<->] (0.3, 1.3) -- (1.3, 0.3);
+        \node[below left] at (0.8, 0.8) {$d$};
+
+        \node[right] at (1.5,0.5) {$(t_1,x_1,y_1)$};
+        \node[above right] at (0.5,1.5) {$(t_2,x_2,y_2)$};
+        \node[yellow!90!orange, above right] at (1, 1) {$\gamma$};
+    \end{tikzpicture}
+    \end{center}
+
+    On a $d=c\Delta t$ car le photon parcourt la distance $d$ en un temps $\Delta t$ à la vitesse $c$. De plus, géométriquement, $d^2=\Delta x^2+\Delta y^2$.\\
+    On a donc $d^2=c^2\Delta t^2=\Delta x^2+\Delta y^2$. Ainsi :
+    \[
+        \Delta s^2=c^2\Delta t^2-\Delta x^2-\Delta y^2=0
+    \]
+
+    Dans un autre référentiel $\cR'$, on a $d'=c'\Delta t'$ car le photon parcourt la distance $d'$ en un temps $\Delta t'$ à la vitesse $c'$ (on considère qu'à priori $c'\ne c$ pour mettre en évidence le postulat 2). De plus, géométriquement, $d'^2=\Delta x'^2+\Delta y'^2$.\\
+    On a donc $d'^2=c'^2\Delta t'^2=\Delta x'^2+\Delta y'^2$. Ainsi :
+    \[
+        \Delta s'^2=c^2\Delta t'^2-\Delta x'^2-\Delta y'^2=(c^2-c'^2)\Delta t'^2=0
+    \]
+    d'après le postulat 2.
+    
+    Ainsi pour tout référentiel, on a $\Delta s^2=\Delta s'^2=0$.
+    Il existe donc un constante $k$ telle que $\Delta s^2=k\Delta s'^2$.
+    \par\medskip
+    On généralise ce résultat. On considère désormais 3 référentiels $\cR_a,\cR_b,\cR_c$.
+    On note la vitesse $\vec v_{ij}=\vec v(\cR_i,\cR_j)$.
+    On a :
+    \[
+        \begin{cases*}
+            \dd s_a^2 = k(v_{ab})\dd s_b^2 \\
+            \dd s_a^2 = k(v_{ac})\dd s_c^2 \\
+            \dd s_b^2 = k(v_{bc})\dd s_c^2
+        \end{cases*}
+        \implies \dd s_a^2 = k(v_{ab})k(v_{bc})\dd s_c^2 = k(v_{ac})\dd s_c^2
+    \]
+    On a donc
+    \[
+        k(v_{bc}) = \frac{k(v_{ac})}{k(v_{ab})}
+    \]
+    Or $k(v)$ ne dépend que $\norm{\vec v}$. \\
+    Mais $\norm{\vec v_{bc}}$ dépend de l'angle $\alpha$ entre $\vec v_{ab}$ et $\vec v_{ac} $. On dérive donc par $\alpha$ :
+    \[
+        \pderiv{v_{bc}}{\alpha}\pderiv{k}{v}(v_{bc}) = \pderiv{}{\alpha}\left(\frac{k(v_{ac})}{k(v_{ab})}\right) = 0
+    \]
+    Comme $\pderiv{v_{bc}}{\alpha} \ne 0$, alors $\pderiv{k}{v}(v_{bc})=0$.
+    \par\medskip
+    On a ensuite $\dd s_a^2=k\dd s_b^2 = k^2 \dd s_c^2 = k^3 \dd s_a^2$. Or la seule racine cubique réelle de l'unité est 1.\\
+    D'où $k=1$ et $\dd s_a^2=\dd s_b^2 =\dd s_c^2$ i.e. l'intervalle $\dd s$ est bien invariant par changement de référentiel. %chktex 12
+}
+
+\defi[Genre des intervalles]{
+    On s'interesse au signe de $\dd s^2$ entre deux événements.
+    \begin{itemize}
+        \item Si $\dd s^2>0$, l'intervalle est de \textit{type temps} ;
+        \item Si $\dd s^2=0$, l'intervalle est de \textit{type lumière} ;
+        \item Si $\dd s^2<0$, l'intervalle est de \textit{type espace}.
+    \end{itemize}
+}
+
+\prop{
+    \begin{itemize}
+        \item Dans un intervalle de type temps, les deux événements peuvent être reliés par un objet matériel (de vitesse $v<c$) ;
+        \item Dans un intervalle de type lumière, les deux événements peuvent être reliés par un photon ;
+        \item Dans un intervalle de type espace, les deux événements ne peuvent pas être reliés par un signal causal.
+    \end{itemize}
+}
+
+\prop{
+    \begin{itemize}
+        \item Pour un intervalle temporel, il existe un référentiel tel que $\dd x=\dd y=\dd z=0$;
+        \item Pour un intervalle spatial, il existe un référentiel tel que $\dd t=0$.
+    \end{itemize}
+}
+
+\defi[Référentiel propre, temps propre]{
+    Pour un objet matériel, on appelle \textit{référentiel propre} le référentiel où il se trouve au repos. \\
+    On a donc $\dd x=\dd y=\dd z=0$.
+    \par\medskip
+    On appelle alors le temps $\tau$ qui s'écoule dans ce référentiel le \textit{temps propre}. Le temps propre est toujours le temps le plus court mesuré pour cet objet. On a alors $\dd\varsigma^2=c^2\dd\tau^2$.
+    \par\medskip
+    Pour un photon, comme dans tout référentiel il se meut à une vitesse $c\ne0$ alors il n'exite pas de référentiel propre. On peut cependant lui attribuer un temps propre qui ne s'écoule pas : $\tau = 0$.
+}
+
+\Demo[Dilatation du temps dans le cas général]{
+    On considère un espace à une dimentions pour alléger le calcul.
+    \par\medskip
+    On considère une montre dans son référentiel propre $\bR$, de temps propre $\dd\tau$.\\
+    Dans un autre référentiel $\cR$, les variations infinitésimales sont à priori non nulles. On a par invariance :
+    \[
+        c^2\dd t-\dd x^2=\dd s^2 = \dd\varsigma^2 = c^2\dd\tau^2
+    \]
+    On peut alors calculer le temps propre :
+    \begin{align*}
+        \dd\tau=\frac{\dd s}c&=\frac1c\sqrt{c^2\dd t^2-\dd x^2}\\
+                             &=\frac{\dd t}c\sqrt{c^2-\left(\deriv xt\right)^2}\\ %chktex 3
+                             &=\dd t\sqrt{1-\left(\frac vc\right)^2}\\ %chktex 3
+                             &=\frac{\dd t}\gamma
+    \end{align*}
+
+    D'où :
+    \[
+        \dd t = \gamma\dd\tau
+    \]
+}
+
+
+\nota[Unités naturelles]{
+    Afin de simplifier les équations, on prend la convention $c=1$.\\
+    On a par exemple $\dd s^2 = \dd t^2 - \dd x^2 - \dd y^2 - \dd z^2$ ou encore $\gamma = \frac1{\sqrt{1-v^2}}$.\\
+    L'emplacement de $c$ peut être retrouvé par analyse dimensionnelle si besoin.
+}
+
+\subsection{Diagrammes d'espace-temps}
+\subsubsection{Représentation de différents référentiels}
+
+\begin{minipage}{0.65\textwidth}
+    On considère un reférentiel \textcolor{blue}{$\cR'$} en mouvement à la vitesse $v$ par rapport à un référentiel $\cR$. Dans le diagramme d'espace-temps, l'axe des temps \textcolor{blue}{$t'$} de \textcolor{blue}{$\cR'$} est incliné d'un angle \textcolor{green!70!black}{$\theta$} par rapport à l'axe des temps $t$ de $\cR$, avec $\tan\textcolor{green!70!black}\theta = v/c$.\\
+    Pour observer cela, il suffit de tracer la trajectoire d'un point fixe dans \textcolor{blue}{$\cR'$}, qui se déplace donc à la vitesse $v$ dans $\cR$, car l'axe du temps correspond aux points $(\textcolor{blue}{t'}, \textcolor{blue}{x'}=0)$.\\
+    On trace aussi la trajectoir d'un photon, qui est indépendante du référentiel, et qui correspond à une droite d'inclinaison de $45^\circ$ (car $c=1$) dans le diagramme d'espace-temps.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+\begin{tikzpicture}[>=Stealth, scale=0.5]   
+    % pente demandée
+    \pgfmathsetmacro{\m}{0.3}  % pente = tan(-0.3)
+
+    % Lumière
+    \draw[thick, dashed, yellow!90!orange] (-4,-4) -- (4,4);
+    \draw[thick, dashed, yellow!90!orange] (4,-4) -- (-4,4);
+
+    % Axes du repère R
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$t$};
+
+    % Axe t' (repère R') : droite t = m x
+    \draw[->, thick, blue] ({-4*\m},-4) -- ({4*\m},4) node[above right] {$t'$};
+
+    % Origine
+    \fill (0,0) circle (2pt) node[below left] {$\cR$};
+    \draw[blue] (0,0) circle (2pt) node[above left] {$\cR'$};
+
+    \coordinate (O) at (0,0);
+    \coordinate (T) at (0,3);        % axe t
+    \coordinate (Tp) at ({3*\m},3); % axe t'
+
+    \draw pic[draw, <-, green!70!black, "$\theta$", angle radius=1cm, angle eccentricity=1.4]
+    {angle = Tp--O--T};
+
+\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.65\textwidth}
+    On peut remarquer que les axes $\textcolor{blue}{t'}$ et $\textcolor{blue}{x'}$ sont symétriques par rapport à la droite du photon, qui correspond à l'axe de la lumière, mais on va plutot tracer l'axe $\textcolor{blue}{x'}$ via une expérience de pensée.\\
+    On se place dans le référentiel \textcolor{blue}{$\cR'$} et on règle notre horloge à $\textcolor{blue}{t_0'}=~-10\text{ s}$. On place un miroir à $\textcolor{blue}{x'}=10\text{ m}$ et on envoie un photon vers ce miroir. Le photon rebondit sur le miroir et revient à l'origine, qui affiche alors $\textcolor{blue}{t_1'}=10\text{ s}$.\\
+    Ainsi il est réfléchi à $\textcolor{blue}{t'}=0\text{ s}$.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+\begin{tikzpicture}[>=Stealth, scale=0.5]   
+    % pente demandée
+    \pgfmathsetmacro{\m}{0.3}  % pente = tan(-0.3)
+
+    % Lumière
+    \draw[thick, dashed, yellow!90!orange] (-4,-4) -- (4,4);
+    \draw[thick, dashed, yellow!90!orange] (4,-4) -- (-4,4);
+
+    % Axes du repère R
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$t$};
+
+    % Axe t' (repère R') : droite t = x/m
+    \draw[->, thick, blue] ({-4*\m},-4) -- ({4*\m},4) node[above right] {$t'$};
+
+    % Origine
+    \fill (0,0) circle (4pt) node[below left] {$\cR$};
+    \draw[blue] (0,0) circle (4pt) node[above left] {$\cR'$};
+
+    \pgfmathsetmacro{\a}{1-\m*\m}
+    \pgfmathsetmacro{\i}{(3*\m+\a)/(1+\m)}
+    \pgfmathsetmacro{\b}{2*\i-3*\m}
+
+    \fill[blue] ({-1.5*\m}, -1.5) circle (4pt) node[left] {$t_0'$};
+    \fill[blue] ({1.5*\m}, 1.5) circle (4pt) node[left=2mm] {$t_1'$};
+    \fill[blue] ({1.5},{1.5*\m}) circle (4pt);
+
+    \begin{feynman}
+        \vertex (1) at ({-1.5*\m},-1.5);
+        \vertex (2) at ({1.5},{1.5*\m});
+        \vertex (3) at ({1.5*\m},1.5);
+        \diagram*{
+        (1) -- [photon, thick, color=yellow!90!orange](2) -- [photon, thick, color=yellow!90!orange](3),
+        };
+    \end{feynman}
+
+\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.65\textwidth}
+    On réitère et on règle notre horloge cette fois à $\textcolor{blue}{t_0'}=-20\text{ s}$. On place un miroir à $\textcolor{blue}{x'}=20\text{ m}$ et on envoie un photon vers ce miroir. Le photon rebondit sur le miroir et revient à l'origine, qui affiche alors $\textcolor{blue}{t_1'}=20\text{ s}$.\\
+    Ainsi il est de même réfléchi à $\textcolor{blue}{t'}=0\text{ s}$.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+\begin{tikzpicture}[>=Stealth, scale=0.5]   
+    % pente demandée
+    \pgfmathsetmacro{\m}{0.3}  % pente = tan(-0.3)
+
+    % Lumière
+    \draw[thick, dashed, yellow!90!orange] (-4,-4) -- (4,4);
+    \draw[thick, dashed, yellow!90!orange] (4,-4) -- (-4,4);
+
+    % Axes du repère R
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$t$};
+
+    % Axe t' (repère R') : droite t = x/m
+    \draw[->, thick, blue] ({-4*\m},-4) -- ({4*\m},4) node[above right] {$t'$};
+    % \draw[->, thick, red] (-4,{-4*\m}) -- (4,{4*\m}) node[above right] {$x'$};
+
+    % Origine
+    \fill (0,0) circle (4pt) node[below left] {$\cR$};
+    \draw[blue] (0,0) circle (4pt) node[above left] {$\cR'$};
+
+    \fill[blue] ({-3*\m}, -3) circle (4pt) node[left] {$t_0'$};
+    \fill[blue] ({3*\m}, 3) circle (4pt) node[left] {$t_1'$};
+    \fill[blue] ({1.5},{1.5*\m}) circle (4pt);
+    \fill[blue] ({3},{3*\m}) circle (4pt);
+
+    \begin{feynman}
+        \vertex (1) at ({-3*\m},-3);
+        \vertex (2) at ({3},{3*\m});
+        \vertex (3) at ({3*\m},3);
+        \diagram*{
+        (1) -- [photon, thick, color=yellow!90!orange](2) -- [photon, thick, color=yellow!90!orange](3),
+        };
+    \end{feynman}
+
+\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.65\textwidth}
+    Les points tracés sont les positions des miroirs, tous positionnés sur l'axe $\textcolor{blue}{x'}$. On peut ainsi tracer l'axe $\textcolor{blue}{x'}$ en reliant ces points. On remarque que la symétrie par rapport à la droite du photon est vérifiée.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+\begin{tikzpicture}[>=Stealth, scale=0.5]   
+    % pente demandée
+    \pgfmathsetmacro{\m}{0.3}  % pente = tan(-0.3)
+
+    % Lumière
+    \draw[thick, dashed, yellow!90!orange] (-4,-4) -- (4,4);
+    \draw[thick, dashed, yellow!90!orange] (4,-4) -- (-4,4);
+
+    % Axes du repère R
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$t$};
+
+    % Axe t' (repère R') : droite t = x/m
+    \draw[->, thick, blue] ({-4*\m},-4) -- ({4*\m},4) node[above right] {$t'$};
+    \draw[->, thick, blue] (-4,{-4*\m}) -- (4,{4*\m}) node[above right] {$x'$};
+
+    % Origine
+    \fill (0,0) circle (4pt) node[below left] {$\cR$};
+    \draw[blue] (0,0) circle (4pt) node[above left] {$\cR'$};
+
+    \fill[blue] ({1.5},{1.5*\m}) circle (4pt);
+    \fill[blue] ({3},{3*\m}) circle (4pt);
+
+\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.65\textwidth}
+    Si on avait eu une vitesse $v<0$ (ou s'il l'on considère $\cR$ depuis $\cR'$) on aurait eu une pente négative pour l'axe $t'$ et $x'$.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+\begin{tikzpicture}[>=Stealth, scale=0.5]   
+    % pente demandée
+    \pgfmathsetmacro{\m}{-0.3}  % pente = tan(-0.3)
+
+    % Lumière
+    \draw[thick, dashed, yellow!90!orange] (-4,-4) -- (4,4);
+    \draw[thick, dashed, yellow!90!orange] (4,-4) -- (-4,4);
+
+    % Axes du repère R
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$t$};
+
+    % Axe t' (repère R') : droite t = x/m
+    \draw[->, thick, blue] ({-4*\m},-4) -- ({4*\m},4) node[above right] {$t'$};
+    \draw[->, thick, blue] (-4,{-4*\m}) -- (4,{4*\m}) node[above right] {$x'$};
+
+    % Origine
+    \fill (0,0) circle (4pt) node[below left] {$\cR$};
+    \draw[blue] (0,0) circle (4pt) node[above right] {$\cR'$};
+
+\end{tikzpicture}
+\end{minipage}
+
+\subsubsection{Cônes de lumières}
+\begin{minipage}{0.65\textwidth}
+    On considère désormais quatres événements $E_0,E_1,E_2,E_3$ tels que $E_0$ et $E_1$ sont séparés par un intervalle de type temps, $E_0$ et $E_2$ sont séparés par un intervalle de type espace, et $E_0$ et $E_3$ sont séparés par un intervalle de type lumière.\\
+    On peut ainsi tracer les cônes de lumière à partir de $E_0$, qui correspondent à l'ensemble des événements séparés de $E_0$ par un intervalle de type lumière.\\
+    Les événements à l'intérieur du cône de lumière sont accessibles à partir de $E_0$ par un signal causal, c'est à dire que $E_0$ peut influencer ces événements. Par exemple un vaisseau spatial délivrant un message.\\
+    Les événements à l'extérieur du cône de lumière sont, au contraire, inaccessibles à partir de $E_0$. Il ne peuvent en aucun cas s'influencer ou interagir ensemble.\\
+    Les événements sur le cône de lumière sont seulemennt accessibles à partir de $E_0$ par un photon. Si l'on veut communiquer entre ces événements, il faut utiliser un signal lumineux.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+\begin{tikzpicture}[>=Stealth, scale=0.5]   
+    % Lumière
+    \draw[thick, dashed, yellow!90!orange] (-4,-4) -- (4,4);
+    \draw[thick, dashed, yellow!90!orange] (4,-4) -- (-4,4);
+    \fill[yellow!90!orange, opacity=0.2] (0,0) -- (4,4) -- (-4,4) -- cycle;
+    \fill[yellow!90!orange, opacity=0.2] (0,0) -- (4,-4) -- (-4,-4) -- cycle;
+
+    % Axes du repère R
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$t$};
+
+    % Evenements
+    \node[below left] at (0,0) {$\cR$};
+    \fill (0,0) circle (4pt) node[below right] {$E_0$};
+    \fill (1,2) circle (4pt) node[above] {$E_1$};
+    \fill (2.5,0.5) circle (4pt) node[above right] {$E_2$};
+    \fill (2,2) circle (4pt) node[above right] {$E_3$};
+
+    \draw[->, thick, green!80!black] (0,0) -- (1,2);
+    \draw[->, thick, dashed] (0,0) -- (2.5,0.5);
+    \draw[red, thick] (1.05,0.05) -- (1.45,0.45);
+    \draw[red, thick] (1.05,0.45) -- (1.45,0.05);
+
+    \begin{feynman}
+        \vertex (a) at (0,0);
+        \vertex (b) at (2,2);
+        \diagram*{
+            (a) -- [photon, thick, color=yellow!90!orange] (b),
+        };
+    \end{feynman}
+
+\end{tikzpicture}
+\end{minipage}
+
+\begin{minipage}{0.65\textwidth}
+    Ce que celà implique, si l'on considère un autre référentiel en mouvement à une vitesse $v'$ négative et suffisament élevée (en module), on peut «placer» $E_2$ dans le passé de $E_0$. Et comme ils ne peuvent aucunement s'influencer, celà ne casse pas le principe de causalité.\\
+    Si on avait pris $v'$ positif, $E_1$ se serait rapproché du bord du cône, mais n'aurait jamais pu l'atteindre. Pour celà il faudrait déplacer le référentiel à la vitesse $c$.
+\end{minipage}
+\hfill
+\begin{minipage}{0.30\textwidth}
+\begin{tikzpicture}[>=Stealth, scale=0.5]   
+    % pente demandée
+    \pgfmathsetmacro{\m}{-0.4}
+    \pgfmathsetmacro{\g}{1/(1-\m^2)^0.5}
+
+    % Lumière
+    \draw[thick, dashed, yellow!90!orange] (-4,-4) -- (4,4);
+    \draw[thick, dashed, yellow!90!orange] (4,-4) -- (-4,4);
+    \fill[yellow!90!orange, opacity=0.2] (0,0) -- (4,4) -- (-4,4) -- cycle;
+    \fill[yellow!90!orange, opacity=0.2] (0,0) -- (4,-4) -- (-4,-4) -- cycle;
+
+    % Axes du repère R
+    \draw[->, thick] ({-4*\m},-4) -- ({4*\m},4) node[above right] {$t$};
+    \draw[->, thick] (-4,{-4*\m}) -- (4,{4*\m}) node[above right] {$x$};
+
+    % Axes du repère R'
+    \draw[->, thick, blue] (-4,0) -- (4,0) node[right] {$x'$};
+    \draw[->, thick, blue] (0,-4) -- (0,4) node[above] {$t'$};
+
+    % Evenements
+    \node[below left, blue] at (0,0) {$\cR'$};
+    \fill (0,0) circle (4pt) node[above left] {$E_0$};
+    \fill ({\g*(1+\m*2)},{\g*(2+\m)}) circle (4pt) node[above right] {$E_1$};
+    \fill ({\g*(2.5+0.5*\m)},{\g*(0.5+\m*2.5)}) circle (4pt) node[right] {$E_2$};
+    \fill ({\g*2*(1+\m)},{\g*2*(1+\m)}) circle (4pt) node[above right] {$E_3$};
+
+    \draw[->, thick, green!80!black] (0,0) -- ({\g*(1+\m*2)},{\g*(2+\m)});
+    \draw[->, thick, dashed] (0,0) -- ({\g*(2.5+0.5*\m)},{\g*(0.5+\m*2.5)});
+
+    \begin{feynman}
+        \vertex (a) at (0,0);
+        \vertex (b) at ({\g*2*(1+\m)},{\g*2*(1+\m)});
+        \diagram*{
+            (a) -- [photon, thick, color=yellow!90!orange] (b),
+        };
+    \end{feynman}
+
+\end{tikzpicture}
+\end{minipage}
+
+Ainsi $c$ est non seulement la vitesse de la lumière, mais surtout la vitesse de la causalité.
+
+\subsection{Transformation de \textsc{Lorentz}}
+
+\defi[Transformation de \textsc{Lorentz}]{
+    La \textit{transformation de \textsc{Lorentz}} est la transformation qui permet de passer d'un système de coordonées d'un référentiel $\cR$ à un autre système de coordonées d'un autre référentiel $\cR'$ en translation rectiligne uniforme par rapport à $\cR$.
+    \par\medskip
+    Elle doit conserver l'intervalle invariant et être linéaire du fait des symétries de l'univers (symétrie de translation et isotropie).
+}
+
+\prop[Expression de la transformation de \textsc{Lorentz}]{
+    Soient $\cR$ un référentiel et $\cR'$ un autre référentiel se déplaçant d'une translation rectiligne uniforme dev vitesse $\vec v=v\hat e_x$ par rapport à $\cR$.
+
+    On a :
+    \begin{align*}
+        \begin{cases*}
+            t' = \gamma(t-vx) \\
+            x' = \gamma(x-vt) \\
+            y' = y \\
+            z' = z
+        \end{cases*}\\
+        \begin{pmatrix}
+            t'\\x'\\y'\\z'
+        \end{pmatrix}=\Lambda
+        \begin{pmatrix}
+            t\\x\\y\\z
+        \end{pmatrix}
+    \end{align*}
+    Où :
+    \[
+        \Lambda = \begin{pmatrix}
+            \gamma & -\gamma v & 0 & 0 \\
+            -\gamma v & \gamma & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1
+        \end{pmatrix} = \begin{pmatrix}
+            \ch\phi & -\sh\phi & 0 & 0 \\
+            -\sh\phi & \ch\phi & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1
+        \end{pmatrix}
+    \]
+    Avec $\phi=\argch\gamma$.
+    Plus généralement, pour $\vec v$ quelconque, on a :
+    \[
+        \Lambda = \begin{pmatrix}
+            \gamma & -\gamma v_x & -\gamma v_y & -\gamma v_z\\
+            -\gamma v_x & 1+(\gamma-1)\frac{v_x^2}{v^2} & (\gamma-1)\frac{v_xv_y}{v^2} & (\gamma-1)\frac{v_xv_z}{v^2} \\
+            -\gamma v_y & (\gamma-1)\frac{v_xv_y}{v^2} & 1+(\gamma-1)\frac{v_y^2}{v^2} & (\gamma-1)\frac{v_yv_z}{v^2} \\
+            -\gamma v_z & (\gamma-1)\frac{v_xv_z}{v^2} & (\gamma-1)\frac{v_yv_z}{v^2} & 1+(\gamma-1)\frac{v_z^2}{v^2} \\
+        \end{pmatrix}
+    \]
+    \rem Pour $v\ll1$, on retrouve la transformation de \textsc{Galilée} :
+    \[
+        \begin{cases*}
+            t' = t-vx+o(v^2) \\
+            x' = x-vt+o(v^2) \\
+        \end{cases*}
+    \]
+}
+
+\Demo[Expression hyperbolique]{
+    Comme $\gamma>1$, on peut poser $\phi=\argch\gamma$.
+    On a $\ch(\phi)^2-\sh(\phi)^2=1$ donc 
+    \begin{align*}
+        \sh\phi &=\pm\sqrt{\ch(\phi)^2-1}\\
+                &=\pm\sqrt{\gamma^2-1}\\
+                &=\pm\sqrt{\frac1{1-v^2}-1}\\
+                &=\pm\sqrt{\frac{v^2}{1-v^2}}\\
+                &=\pm v\sqrt{\frac1{1-v^2}}\\
+                &=\pm v\gamma
+    \end{align*}
+    Or $\phi>0$ et $v\gamma>0$, donc par parité de $\sh$ on a :
+    \[
+        v\gamma = \sh\phi
+    \]
+    D'où :
+    \[
+        \Lambda = \begin{pmatrix}
+            \gamma & -\gamma v \\
+            -\gamma v & \gamma
+        \end{pmatrix} = \begin{pmatrix}
+            \ch\phi & -\sh\phi \\
+            -\sh\phi & \ch\phi
+        \end{pmatrix}
+    \]
+}
+
+\Demo{
+    Soient $\alpha,\beta,\gamma,\delta$ tel que on ait la transformation s'exprime sous la combinaison linéaire suivante :
+    \[
+        \begin{cases*}
+            t'=\alpha t + \beta x \\
+            x'=\gamma x + \delta t
+        \end{cases*}
+    \]
+    Sur l'axe $t'$, on a $x'=0$ et $t=\frac xv$.
+    De même sur l'axe $x'$ on a $t'=0$ et $t=xv$.\\
+    D'où :
+    \[
+        \begin{cases*}
+            0=\alpha vt + \beta t \\
+            0=\gamma vx + \delta x
+        \end{cases*}
+        \iff
+        \begin{cases*}
+            \beta  = -\alpha v\\
+            \delta = -\gamma v
+        \end{cases*}
+    \]
+    Ainsi :
+    \[
+        \begin{cases*}
+            t'=\alpha(t-vx) \\
+            x'=\gamma(x-vt)
+        \end{cases*}
+    \]
+    Or par invariance de l'intervalle on a $t'^2-x'^2=t^2-x^2$.
+    Et :
+    \begin{align*}
+        t'^2-x'^2&=\alpha^2(t-vx)^2-\gamma^2(x-vt)^2\\
+                 &=\alpha^2(t^2+v^2x^2-2vtx) - \gamma^2(x^2+v^2t^2-2vtx)\\
+    \end{align*}
+    Or il n'y a pas de termes croisés dans $t^2-x^2$ donc $\alpha^2 = \gamma^2$ i.e. $\alpha=\pm\gamma$.\\
+    Ainsi on a :
+    \[
+        t^2-x^2=\gamma^2(t^2-x^2+v^2(x^2-t^2))=\gamma^2(t^2-x^2)(1-v^2)
+    \]
+    Ainsi on a :
+    \[
+        \gamma^2(1-v^2)=1\iff\gamma^2 = \frac1{1-v^2}
+    \]
+    D'où l'expression du facteur de \textsc{Lorentz} :
+    \[
+        \gamma = \frac1{\sqrt{1-v^2}}
+    \]
+    On a donc :
+    \[
+        \begin{cases*}
+            t' = \pm\gamma(t-vx) \\
+            x' = \gamma(x-vt)
+        \end{cases*}
+    \]
+    Or si $v=0$, il faut que $t'=\pm t = t$, d'où :
+    \[
+        \begin{cases*}
+            t' = \gamma(t-vx) \\
+            x' = \gamma(x-vt) \\
+        \end{cases*}
+    \]
+    \hfill$\qed$
+}
+\end{document}

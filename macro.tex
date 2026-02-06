@@ -1,0 +1,397 @@
+% chktex-file  1
+% chktex-file 17
+% chktex-file 26
+
+% ===============================
+%  MACROS - Mathématiques
+% ===============================
+
+% ---------------------------
+% PACKAGES ESSENTIELS
+% ---------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bbm} % pour \mathbbm 1
+\usepackage{mathrsfs} % pour \mathscr
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox} % pour les encadrés
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{slashed}
+\usepackage[version=4]{mhchem}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage[compat=1.1.0]{tikz-feynman}
+% ======== supprime les warnings LuaTeX ========
+\makeatletter
+\pgfkeys{
+  /graph drawing/node distance/.code=\relax,
+  /graph drawing/level distance/.code=\relax,
+  /graph drawing/sibling distance/.code=\relax,
+}
+\makeatother
+\tikzfeynmanset{warn luatex=false}
+
+\tikzfeynmanset{
+  every photon/.style={thick, color=yellow!90!black}
+}
+
+
+\usetikzlibrary{decorations.markings}
+
+\usepackage{silence}
+\WarningFilter{latexfont}{Font shape `T1/cmr/m/scit' undefined}
+
+
+% -------------------------------
+%  Ensembles Blackboard (\mathbb)
+% -------------------------------
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bG}{\mathbb{G}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bI}{\mathbb{I}}
+\newcommand{\bJ}{\mathbb{J}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bL}{\mathbb{L}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bO}{\mathbb{O}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bU}{\mathbb{U}}
+\newcommand{\bV}{\mathbb{V}}
+\newcommand{\bW}{\mathbb{W}}
+\newcommand{\bX}{\mathbb{X}}
+\newcommand{\bY}{\mathbb{Y}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+% -------------------------------
+%  Ensembles Calligraphiques (\mathcal)
+% -------------------------------
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+% -------------------------------
+%  Ensembles Script (\mathscr)
+% -------------------------------
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+% -------------------------------
+%  Commandes mathématiques utiles
+% -------------------------------
+
+% Opérateurs
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rang}{rang}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\RC}{RC}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\BC}{BC}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\Hess}{Hess}
+
+% Fonctions usuelles
+% Fonctions arc
+\newcommand{\Arccos}{\operatorname{Arccos}}
+\newcommand{\Arcsin}{\operatorname{Arcsin}}
+\newcommand{\Arctan}{\operatorname{Arctan}}
+
+% Fonctions hyperboliques en notation française
+\newcommand{\ch}{\operatorname{ch}} % cosinus hyperbolique
+\newcommand{\sh}{\operatorname{sh}} % sinus hyperbolique
+\newcommand{\thh}{\operatorname{th}} % tangente hyperbolique
+
+% Fonctions inverses
+\newcommand{\argch}{\operatorname{argch}} % arccosh
+\newcommand{\argsh}{\operatorname{argsh}} % arcsinh
+\newcommand{\argth}{\operatorname{argth}} % arctanh
+
+% Logarithme complexe
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\Log}{\operatorname{Log}}
+
+% Différentiels et dérivées
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\deriv}[2]{\frac{\dd#1}{\dd#2}}
+\newcommand{\pderiv}[2]{\frac{\partial#1}{\partial#2}}
+
+% Limites, sommes, intégrales
+\newcommand{\limn}{\lim_{n \to+\infty}}
+\newcommand{\sumn}{\sum\limits_{n=0}^{\infty}}
+\newcommand{\Sum}[3]{\sum_{#1=#2}^{#3}}
+\newcommand{\intR}{\int_{-\infty}^{+\infty}}
+
+% Notations usuelles
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\lVert#1 \right\rVert}
+\newcommand{\normop}[1]{\lVert #1 \rVert_{\mathrm{op}}}
+\newcommand{\paren}[1]{\left(#1 \right)}
+\newcommand{\croch}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+
+% Vecteurs et produits scalaires
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\scal}[2]{\left\langle#1, #2 \right\rangle}
+\newcommand{\ps}[2]{\left\langle #1 \,\middle|\, #2 \right\rangle}
+\newcommand{\pv}{\,_\wedge}
+
+% Autres
+\newcommand{\adh}[1]{\overline{#1}}
+\newcommand{\tend}[2]{\xrightarrow[#1\to#2]{}}
+\newcommand{\Res}[2]{\text{Res}(#1,#2)} %chktex 36
+\newcommand{\vp}{\textbf{v.p.}}
+\newcommand{\conv}{\mathop{\ast}\limits}
+\newcommand{\trans}[1]{{#1}^\top}
+\newcommand{\vtrans}[1]{\vec {#1}^\top}
+\newcommand{\indic}{\mathbbm{1}}
+\newcommand{\intseg}[2]{[\![#1, #2]\!]}
+\newcommand{\dl}[1]{\underset{#1\to0}=}
+\newcommand{\Matx}[2]{\Mat_{#1\gets#2}}
+\newcommand{\cte}{\text{C}^\text{te}}
+\newcommand{\vcte}{\vec\cte}
+\newcommand{\eVc}{\text{ eV}\!\!\cdot\!\text{c}^{-2}}
+\newcommand{\MeVc}{\text{ MeV}\!\!\cdot\!\text{c}^{-2}}
+\newcommand{\GeVc}{\text{ GeV}\!\!\cdot\!\text{c}^{-2}}
+\newcommand{\TeVc}{\text{ TeV}\!\!\cdot\!\text{c}^{-2}}
+\newcommand{\GeVcp}{\text{ GeV}\!\!\cdot\!\text{c}^{-1}}
+\newcommand{\MeV}{\text{ MeV}}
+\newcommand{\GeV}{\text{ GeV}}
+\newcommand{\MeVfm}{\text{ MeV}\!\!\cdot\!\text{fm}}
+\newcommand{\tot}{\text{tot}}
+\newcommand{\AN}{\mathscr{A\!.\,N\!.\;}}
+
+% Redef
+\let\oldexists\exists
+\renewcommand{\exists}{\oldexists\,}
+
+\makeatletter
+\renewcommand*{\toclevel@part}{0}
+\makeatother
+
+% ----------------------------
+\usepackage{enumitem}
+\setlist[itemize,1]{label=\tiny\textbullet}
+% ----------------------------
+
+% ---------------------------
+% ENVIRONNEMENTS MATHÉMATIQUES
+% ---------------------------
+% Mise en forme
+\setcounter{secnumdepth}{4} % numérote jusqu’aux sous-sous-sections
+\setcounter{tocdepth}{2}
+
+\titleclass{\subsubsubsection}{straight}[\subsubsection]
+\newcounter{subsubsubsection}[subsubsection]
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsubsubsection}
+  {1em}
+  {}
+
+\titlespacing*{\subsubsubsection}
+  {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\renewcommand{\thepart}{}
+\renewcommand{\thesection}{\Roman{section}.}
+\renewcommand{\thesubsection}{\arabic{subsection}.}
+\renewcommand{\thesubsubsection}{\alph{subsubsection})} % chktex 9 chktex 10
+\renewcommand{\thesubsubsubsection}{\roman{subsubsubsection}.}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Définition}[subsection]
+\renewcommand{\thedefinition}{\thesection\thesubsection\arabic{definition}}
+\newtheorem{lemme}{Lemme}[subsection]
+\renewcommand{\thelemme}{\thesection\thesubsection\arabic{lemme}}
+\providecommand*{\lemmeautorefname}{Lemme}
+\newtheorem{theoreme}{Théorème}[subsection]
+\renewcommand{\thetheoreme}{\thesection\thesubsection\arabic{theoreme}}
+\newtheorem{propriete}{Propriété}[subsection]
+\renewcommand{\thepropriete}{\thesection\thesubsection\arabic{propriete}}
+\providecommand*{\proprieteautorefname}{Propriété}
+\newtheorem{corollaire}{Corollaire}[subsection]
+\renewcommand{\thecorollaire}{\thesection\thesubsection\arabic{corollaire}}
+\newtheorem{exemple}{Exemple}[subsection]
+\renewcommand{\theexemple}{\thesection\thesubsection\arabic{exemple}}
+\newtheorem{notation}{Notation}[subsection]
+\renewcommand{\thenotation}{\thesection\thesubsection\arabic{notation}}
+\newtheorem{rappel}{Rappel}[subsection]
+\renewcommand{\therappel}{\thesection\thesubsection\arabic{rappel}}
+
+% Encadrés stylés pour définitions et théorèmes
+\tcbset{
+  mybox/.style={
+    colback=#1!5,
+    colframe=#1!80!black,
+    boxrule=0.8pt,
+    arc=4pt,
+    left=6pt,right=6pt,top=6pt,bottom=6pt
+  }
+}
+
+% Nouveau théorème nommé non numéroté
+\newenvironment{namedtheorem}[1]{%
+  \par\medskip
+  \phantomsection % permet la référence hyperref
+  \def\@currentlabelname{#1}% nom utilisé pour \nameref
+}{%
+  \par\medskip
+}
+
+% Commandes personnalisées
+% D avec double slash oblique souscrit
+\newcommand{\Dslash}{D_{\!\!\!\raisebox{1ex}{\scriptsize$\diagup\!\!\!\diagup$}}}
+
+
+\newcommand{\defi}[2][\,]{%
+  \begin{tcolorbox}[mybox=blue,title=\definition{#1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\ex}[2][\,]{%
+  \begin{tcolorbox}[mybox=gray,title=\exemple{#1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\lem}[2][\,]{%
+  \begin{tcolorbox}[mybox=orange,title=\lemme{#1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\Lem}[2][\,]{%
+  \begin{tcolorbox}[mybox=orange,title=\textbf{Lemme #1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\nota}[2][\,]{%
+  \begin{tcolorbox}[mybox=black,title=\notation{#1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\prop}[2][\,]{%
+    \refstepcounter{propriete}%
+    \begin{tcolorbox}[mybox=red,title=\textbf{Propriété~\thepropriete.}~{#1}]
+    #2
+    \end{tcolorbox}
+}
+\newcommand{\coro}[2][\,]{%
+    \begin{tcolorbox}[colback=red!5!white, colframe=red!60!black, title=\corollaire{#1}]
+    #2
+    \end{tcolorbox}
+}
+\newcommand{\theo}[2][\,]{%
+  \begin{tcolorbox}[mybox=purple,title=\theoreme{#1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\Theo}[2]{%
+  \begin{tcolorbox}[mybox=purple,title=\textbf{Théorème #1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\Post}[2]{%
+  \begin{tcolorbox}[mybox=purple,title=\textbf{Postulat #1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\TheoA}[2]{%
+    \begin{namedtheorem}{#1}
+        \begin{tcolorbox}[mybox=purple,title=\textbf{Théorème de \textsc{#1}}]
+            #2
+        \end{tcolorbox}
+    \end{namedtheorem}
+}
+\newcommand{\DemoA}[2]{%
+  \begin{tcolorbox}[mybox=pink,title=\textbf{$\Dslash$ \textsc{#1}}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\Demo}[2][]{%
+  \begin{tcolorbox}[mybox=pink,title=\textbf{$\Dslash$ #1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\rap}[2][\,]{
+  \begin{tcolorbox}[mybox=violet,title=\rappel{#1}]
+    #2
+  \end{tcolorbox}
+}
+\newcommand{\rem}{\textbf{Remarque : }}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+% -------------------------------
+%  Fin du fichier
+% -------------------------------

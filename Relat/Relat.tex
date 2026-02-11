@@ -1,5 +1,6 @@
 % chktex-file 1
 % chktex-file 3
+% chktex-file 12
 % chktex-file 25
 % chktex-file 26
 \documentclass[a4paper]{report}
@@ -50,7 +51,7 @@
 \begin{center}
     {\Large \textbf{\titre}}\\[1cm]
     {\large \auteur}\\[0.5cm]
-    {30 janvier 2026}
+    {8 février 2026}
 \end{center}
 
 \vfill % pousse les infos suivantes en bas
@@ -845,11 +846,14 @@ Un référentiel est donc une collection de montres et de règles à travers l'e
 Ainsi $c$ est non seulement la vitesse de la lumière, mais surtout la vitesse de la causalité.
 
 \subsection{Transformation de \textsc{Lorentz}}
+\subsubsection{Définition}
 
 \defi[Transformation de \textsc{Lorentz}]{
     La \textit{transformation de \textsc{Lorentz}} est la transformation qui permet de passer d'un système de coordonées d'un référentiel $\cR$ à un autre système de coordonées d'un autre référentiel $\cR'$ en translation rectiligne uniforme par rapport à $\cR$.
     \par\medskip
     Elle doit conserver l'intervalle invariant et être linéaire du fait des symétries de l'univers (symétrie de translation et isotropie).
+    \par\medskip
+    On note l'ensemble des tranformations de \textsc{Lorentz} $O(1,3)$.
 }
 
 \prop[Expression de la transformation de \textsc{Lorentz}]{
@@ -994,4 +998,293 @@ Ainsi $c$ est non seulement la vitesse de la lumière, mais surtout la vitesse d
     \]
     \hfill$\qed$
 }
+
+\subsubsection{Propriété de la transformation de \textsc{Lorentz}}
+
+\defi[Quadrivecteur]{
+    On appelle \textit{quadrivecteur} les vecteurs de l'espace-temps (de dimension 4). On les note :
+    \[
+        \ul x=\qv txyz
+    \]
+}
+
+\defi[Métrique de \textsc{Minkowski}]{
+    On définit la \textit{métrique de \textsc{Minkowski}} par :
+    \[
+        \eta = \diag(1,-1,-1,-1)
+    \]
+
+    Ainsi la norme de \textsc{Minskowki} se ramène à notre intervalle invariant :
+    \[
+        \ul x^2 = \trans{\ul x}\eta\ul x = t^2-x^2-y^2-z^2
+    \]
+    \rem On appelle aussi l'espace de \textsc{Minkowski} l'\textit{l'espace hyperbolique}.
+}
+
+\prop[Pseudo-orthogonalité des transformation de \textsc{Lorentz}]{
+    Soit $\Lambda\in\cM_{1,3}(\bR)$. Alors :
+    \[
+        \Lambda\in O(1,3)\iff\trans\Lambda\eta\Lambda=\eta
+    \]
+    On dit alors que $\Lambda$ est \textit{pseudo-orthogonale} ou \textit{\textsc{Minkowski}-orthogonale}.
+}
+
+\Demo{
+    Soient $\ul x$ et $\ul x'=\Lambda\ul x$.
+    \par\medskip
+    \ul{$\implies$ : On suppose $\Lambda\in O(1,3)$}\\
+    On a :
+    \begin{align*}
+        \ul x'^2&=\trans{\ul x'}\eta\ul x'\\
+                &=\trans{(\Lambda\ul x)}\eta\Lambda\ul x\\
+                &=\trans{\ul x}\trans\Lambda\eta\Lambda\ul x
+    \end{align*}
+    Or $\Lambda$ préserve la norme, donc $\ul x'^2=\ul x^2$ i.e.
+    \[
+        \trans{\ul x}\trans\Lambda\eta\Lambda\ul x = \trans{\ul x}\eta\ul x
+    \]
+    Ce qui est vrai pour tout $\ul x$.\\
+    D'où :
+    \[
+        \trans\Lambda\eta\Lambda=\eta
+    \]
+    \par\medskip
+    \ul{$\impliedby$ : On suppose $\trans\Lambda\eta\Lambda=\eta$}\\
+    On a de même :
+    \[
+        \ul x'^2=\trans{\ul x}\trans\Lambda\eta\Lambda\ul x
+    \]
+    Donc
+    \[
+        \ul x'^2=\trans{\ul x}\eta\ul x=\ul x^2
+    \]
+    Donc $\Lambda$ conserve la norme de \textsc{Minskowski}.
+    D'où :
+    \[
+        \Lambda\in O(1,3)
+    \]
+}
+
+\rap[Groupe]{
+    Un ensemble $(G,\times)$ est un groupe si :
+    \begin{itemize}
+        \item $\forall x,y\in G, x\times y\in G$;
+        \item $\forall x,y,z\in G, x(yz)=(xy)z$;
+        \item $\exists\id\in G\mid\forall x\in G, \id x=x\id=x$;
+        \item $\forall x\in G,\exists x^{-1}\mid xx^{-1}=x^{-1}x=\id$;
+
+    \end{itemize}
+}
+
+\prop[Structure de groupe]{
+    $(O_{1,3}, \times)$ est un groupe.
+}
+
+\Demo{
+    Soient $\Lambda,\Lambda'\in O(1,3)$.
+    \par\medskip
+    \ul{Montrons que $\Lambda\Lambda'\in O(1,3)$ :}
+    \begin{align*}
+        \trans{(\Lambda\Lambda')}\eta\Lambda\Lambda'&=\trans{\Lambda'}\trans{\Lambda}\eta\Lambda\Lambda'\\
+            &=\trans{\Lambda'}(\trans{\Lambda}\eta\Lambda)\Lambda'\\
+            &=\trans{\Lambda'}\eta\Lambda'\\
+            &=\eta
+    \end{align*}
+    D'où $\Lambda\Lambda'\in O(1,3)$.
+    \par\medskip
+    \ul{Montrons que $\Lambda^{-1}$ existe :}
+    \begin{align*}
+        \det\eta&=\det(\trans\Lambda\eta\Lambda)\\
+                &=\det\trans\Lambda\det\eta\det\Lambda\\
+                &=\det\eta(\det\Lambda)^2
+    \end{align*}
+    Donc $(\det\Lambda)^2=1$.\\
+    D'où :
+    \[
+        \det\Lambda=\pm1\ne0
+    \]
+}
+\defi[Groupe propre de \textsc{Lorentz}]{
+    On appelle \textit{groupe propre de \textsc{Lorentz}} le groupe des transformations de \textsc{Lorentz} propres i.e. de déterminant $1$.\\
+    On le note $SO(1,3)$.\\
+    Elles sont topologiquement connectées à l'identité.
+}
+
+\defi[Inversions spatiale et temporelle]{
+    On défini l'\textit{inversion spatiale} par la transformation :
+    \[
+        P = \diag(1,-1,-1,-1)
+    \]
+    \par\medskip
+        On défini l'\textit{inversion temporelle} par la transformation :
+    \[
+        T = \diag(-1,1,1,1)
+    \]
+    \par\medskip
+    Ce sont toutes deux des transformations de \textsc{Lorentz} impropres.
+}
+
+\prop[Expression de l'inverse d'une transformation de \textsc{Lorentz}]{
+    \[
+        \forall\Lambda\in O(1,3), \Lambda^{-1}=\eta\trans\Lambda\eta
+    \]
+}
+
+\Demo{
+    \begin{align*}
+        &\trans\Lambda\eta\Lambda=\eta\\
+        \iff&\trans\Lambda\eta=\eta\Lambda^{-1}\\
+        \iff&\eta\trans\Lambda\eta=\eta^2\Lambda\\
+        \iff&\eta\trans\Lambda\eta=\Lambda^{-1}
+    \end{align*}
+}
+
+\subsection{Contraction des longueurs}
+Avec les transformations de \textsc{Lorentz}, on peut montrer que contrairement au temps qui se dilate, les longueurs se contractes d'un réferentiel à un autre.
+\par\medskip
+On reconsidère notre wagon, et on y place cette fois une règle dedans. \\
+On va mesure de façon \textbf{immédiate} la position des deux extrémitées de la règle, dans chaque réferentiel.
+\begin{tikzpicture}[>=Stealth, scale=1]
+
+    % Axes 3D (perspective)
+    \draw[->, blue] (0,0) -- (9,0) node[right] {$x'$};
+    \draw[->, blue] (0,0) -- (0,3.5) node[above] {$y'$};
+    \draw[->, blue] (0,0) -- (-1.2,-1.0) node[left] {$z'$};
+
+    % Nom du repère
+    \node[above left, blue] at (0,0) {$\cR'$};
+
+    % Faces du wagon
+    \fill[gray] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+    \fill[gray] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+    \fill[white] (0,0) rectangle (3,3);
+    \draw[thick] (3,0) -- (3.4,0.3);
+    \draw[thick] (0,3) -- (0.4,3.3);
+    \draw[thick] (3,3) -- (3.4,3.3);
+    \draw[thick] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+    \draw[thick] (0,0) rectangle (3,3);          % face avant
+
+    % Longueur l'
+    \draw[<->, blue] (0.5,2) -- (2.5,2) node[midway, above] {$\ell'$};
+
+    % Règles
+    \fill[gray!25!white] (0.5,1.25) rectangle (2.5, 1.75);
+    \draw (0.5,1.25) rectangle (2.5, 1.75);
+    \foreach \x in {0.5,0.7,...,2.5} {
+        \draw (\x, 1.75) -- (\x, 1.6);
+    }
+
+    \draw[thick, dotted, blue] (0.5,1.5) -- (0.5,0) node[below] {$(t_1',x_1')$};
+    \draw[thick, dotted, blue] (2.5,1.5) -- (2.5,0) node[below] {$(t_2',x_2')$};
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=Stealth, scale=1]
+
+    \begin{scope}[shift={(-0.3,-0.3)}]
+        % Axes 3D (perspective)
+        \draw[->] (0,0) -- (10.5,0) node[right] {$x$};
+        \draw[->] (0,0) -- (0,3.5) node[above] {$y$};
+        \draw[->] (0,0) -- (-1.2,-1.0) node[left] {$z$};
+
+        % Nom du repère
+        \node[above left] at (0,0) {$\cR$};
+    \end{scope}
+
+    % Faces du wagon
+    \fill[gray!50!white] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+    \fill[gray!50!white] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+    \fill[white] (0,0) rectangle (3,3);
+    \draw[thick, dashed] (3,0) -- (3.4,0.3);
+    \draw[thick, dashed] (0,3) -- (0.4,3.3);
+    \draw[thick, dashed] (3,3) -- (3.4,3.3);
+    \draw[thick, dashed] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+    \draw[thick, dashed] (0,0) rectangle (3,3);          % face avant
+
+    \draw[thick, dotted] (3,0) -- (3.5,0);
+    \draw[thick, dotted] (3,3) -- (3.5,3);
+    \draw[thick, dotted] (3.4,0.3) -- (3.9,0.3);
+    \draw[thick, dotted] (3.4,3.3) -- (3.9,3.3);
+
+    % Règle
+    \fill[gray!12.5!white] (0.75,1.25) rectangle (2.25, 1.75);
+    \draw[dashed] (0.75,1.25) rectangle (2.25, 1.75);
+    \foreach \x in {0.75,0.9,...,2.25} {
+        \draw (\x, 1.75) -- (\x, 1.6);
+    }
+
+    \begin{scope}[shift={(3.5,0)}]
+        % Faces du wagon
+        \fill[gray!75!white] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+        \fill[gray!75!white] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+        \fill[white] (0,0) rectangle (3,3);
+        \draw[thick, dashed] (3,0) -- (3.4,0.3);
+        \draw[thick, dashed] (0,3) -- (0.4,3.3);
+        \draw[thick, dashed] (3,3) -- (3.4,3.3);
+        \draw[thick, dashed] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+        \draw[thick, dashed] (0,0) rectangle (3,3);          % face avant
+
+        % Règle
+        \fill[gray!15.25!white] (0.75,1.25) rectangle (2.25, 1.75);
+        \draw[dashed] (0.75,1.25) rectangle (2.25, 1.75);
+        \foreach \x in {0.75,0.9,...,2.25} {
+            \draw (\x, 1.75) -- (\x, 1.6);
+        }
+
+        \draw[thick, dotted] (3,0) -- (3.5,0);
+        \draw[thick, dotted] (3,3) -- (3.5,3);
+        \draw[thick, dotted] (3.4,0.3) -- (3.9,0.3);
+        \draw[thick, dotted] (3.4,3.3) -- (3.9,3.3);
+    \end{scope}
+
+    \begin{scope}[shift={(7,0)}]
+        % Faces du wagon
+        \fill[gray] (3,3) -- (3.4,3.3) -- (3.4,0.3) -- (3,0) -- cycle;  % face devant
+        \fill[gray] (3,3) -- (3.4,3.3) -- (0.4,3.3) -- (0,3) -- cycle;  % face dessus
+        \fill[white] (0,0) rectangle (3,3);
+        \draw[thick] (3,0) -- (3.4,0.3);
+        \draw[thick] (0,3) -- (0.4,3.3);
+        \draw[thick] (3,3) -- (3.4,3.3);
+        \draw[thick] (0.4, 3.3) -- (3.4,3.3) -- (3.4,0.3);
+        \draw[thick] (0,0) rectangle (3,3);          % face avant
+
+        % Longueur l
+        \draw[<->] (0.75,2) -- (2.25,2) node[midway, above] {$\ell$};
+
+        % Règle
+        \fill[gray!25!white] (0.75,1.25) rectangle (2.25, 1.75);
+        \draw (0.75,1.25) rectangle (2.25, 1.75);
+        \foreach \x in {0.75,0.9,...,2.25} {
+            \draw (\x, 1.75) -- (\x, 1.6);
+        }
+
+        \draw[thick, dotted] (0.75,1.5) -- (0.75,-0.3) node[below] {$(t_0,x_1)$};
+        \draw[thick, dotted] (2.25,1.5) -- (2.25,-0.3) node[below] {$(t_0,x_2)$};
+        
+        % Vecteur vitesse v (en vert)
+        \draw[->, very thick, green!70!gray] (3.2,1.65) -- (5.2,1.65);
+        \node[above, green!60!black] at (4.2,1.65) {$\vec v$};
+    \end{scope}
+
+\end{tikzpicture}
+
+Par invarience de l'intervalle, on a :
+\[
+    \Delta s^2=\Delta t'^2-\Delta x'^2=\Delta t^2-\Delta x^2
+\]
+Or on a mesuré, du moins dans le référentiel $\cR$, les deux extrémités de la règle en même temps, i.e. $\Delta t^2=0$. Donc :
+\[
+    \ell^2=\Delta t'^2-\ell'^2
+\]
+Or $t'=vx'$, donc $\Delta t'=v\ell'$.
+On obtient donc :
+\[
+    \ell^2=v^2\ell'^2-\ell'^2=(v^2-1)\ell'^2
+\]
+D'où :
+\[\boxed{
+    \ell = \frac1\gamma\ell'\le\ell'
+}\]
+
+
 \end{document}

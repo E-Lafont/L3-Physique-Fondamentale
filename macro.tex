@@ -10,9 +10,9 @@
 % ---------------------------
 % PACKAGES ESSENTIELS
 % ---------------------------
-\usepackage[utf8]{inputenc}          % Encodage UTF-8
-\usepackage[T1]{fontenc}             % Encodage font
-\usepackage[french]{babel}           % Langue française
+\usepackage[utf8]{inputenc}           % Encodage UTF-8
+\usepackage[T1]{fontenc}              % Encodage font
+\usepackage[french]{babel}            % Langue française
 \usepackage{geometry}                 % Gestion des marges
 \usepackage{graphicx}                 % Images
 \usepackage{xcolor}                   % Couleurs
@@ -21,7 +21,8 @@
 \usepackage{enumitem}                 % Listes personnalisées
 \usepackage{fancyhdr}                 % Entêtes et pieds de page
 \usepackage{slashed}                  % Slash notation (\slashed)
-\usepackage[version=4]{mhchem}       % Chimie (\ce{})
+\usepackage{float}                    % Pour le placement des tableaux
+\usepackage[version=4]{mhchem}        % Chimie (\ce{})
 \usepackage{titlesec}                 % Sections supplémentaires
 \usepackage{tikz}                     % Graphiques
 \usepackage[compat=1.1.0]{tikz-feynman} % Diagrammes de Feynman
@@ -34,6 +35,7 @@
 \usepackage{amsmath,amssymb,mathtools} 
 \usepackage{bbm}         % pour \mathbbm 1
 \usepackage{mathrsfs}    % pour \mathscr
+\usepackage{esint}       % pour \oiint
 
 % ---------------------------
 % CONFIGURATIONS DIVERSES
@@ -67,7 +69,8 @@
 \titleclass{\subsubsubsection}{straight}[\subsubsection]
 \newcounter{subsubsubsection}[subsubsection]
 
-\renewcommand{\thepart}{}
+\renewcommand{\thepart}{\!\!\!\!\!}
+\renewcommand{\thechapter}{\arabic{chapter}}
 \renewcommand{\thesection}{\Roman{section}.}
 \renewcommand{\thesubsection}{\arabic{subsection}.}
 \renewcommand{\thesubsubsection}{\alph{subsubsection})} % chktex 9 chktex 10
@@ -83,7 +86,7 @@
   {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 % =======================================================
-% ENSEMBLES ET SYMBOLS MATHÉMATIQUES
+% ENSEMBLES ET SYMBOLES MATHÉMATIQUES
 % =======================================================
 
 % -------------------------------
@@ -141,13 +144,15 @@
 % COMMANDES MATHÉMATIQUES UTILES
 % =======================================================
 % Opérateurs usuels
-\DeclareMathOperator{\im}{Im} \DeclareMathOperator{\rang}{rang}
+\DeclareMathOperator{\im}{Im} \DeclareMathOperator{\rg}{rg}
 \DeclareMathOperator{\tr}{Tr} \DeclareMathOperator{\Sp}{Sp}
-\DeclareMathOperator{\grad}{grad} \DeclareMathOperator{\divg}{div}
+\DeclareMathOperator{\divg}{div}
 \DeclareMathOperator{\rot}{rot} \DeclareMathOperator{\Ker}{Ker}
 \DeclareMathOperator{\cov}{Cov} \DeclareMathOperator{\RC}{RC}
 \DeclareMathOperator{\Jac}{Jac} \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\D}{D} \DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Vect}{Vect}
 
 % Fonctions usuelles et inverses
 \newcommand{\Arccos}{\operatorname{Arccos}}
@@ -176,6 +181,9 @@
 \newcommand{\Sum}[3]{\sum_{#1=#2}^{#3}}
 \newcommand{\intR}{\int_{-\infty}^{+\infty}}
 
+% Opérateurs de champs
+\newcommand{\grad}{\vec\nabla}
+
 % Notations usuelles
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\norm}[1]{\left\lVert#1 \right\rVert}
@@ -183,6 +191,7 @@
 \newcommand{\paren}[1]{\left(#1 \right)}
 \newcommand{\croch}[1]{\left[ #1 \right]}
 \newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\Set}[2]{\left\{ #1 \middle| #2 \right\}}
 
 % Vecteurs et produits scalaires
 \newcommand{\vect}[1]{\overrightarrow{#1}}
@@ -214,6 +223,14 @@
 \newcommand{\MeVfm}{\text{ MeV}\!\!\cdot\!\text{fm}}
 \newcommand{\tot}{\text{tot}}
 \newcommand{\AN}{\mathscr{A\!.\,N\!.\;}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\qv}[4]{\begin{pmatrix} #1 \\ #2 \\ #3 \\ #4 \end{pmatrix}}
+\newcommand{\BC}{\text{BC}}
+\newcommand{\fami}[2]{\left({#1}_1,\dots,{#1}_{#2}\right)}
+\newcommand{\id}{\mathbbm 1}
+\newcommand{\GL}{\text{GL}}
+\newcommand{\Pass}[2]{\text{Pass}_{#1\gets#2}}
+\newcommand{\uexists}{\exists!\,}
 
 % Redefinitions
 \let\oldexists\exists

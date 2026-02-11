@@ -1,18 +1,25 @@
 # Doc Perso
 DocPerso/
-Maths/
+Maths/UE Maths
 Meca Analytique/
 OEM/
+Maths/
 PhyExp/
 PhyPart/
 Phystat/
 Quantique/
 Séminaire/
+Méca Flu/
 media/
 
 # Fichiers tex et autres inutiles
 *.synctex.gz
 *.py
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
